@@ -1,6 +1,9 @@
 
 const express = require('express')
+const { countAllRequests } = require("./monitoring");
+
 const app = express()
+app.use(countAllRequests());
 const port = 3000
 
 app.get('/', (req, res) => {
