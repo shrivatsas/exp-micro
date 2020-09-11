@@ -1,0 +1,6 @@
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-exporter-zipkin
+opentelemetry-exporter-prometheus
+opentelemetry-instrumentation-fastapi
+opentelemetry-instrumentation-aiohttp-client
