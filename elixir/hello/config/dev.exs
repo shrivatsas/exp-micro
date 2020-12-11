@@ -4,7 +4,10 @@ database_url = System.get_env("DATABASE_URL")
 
 # Configure your database
 config :hello, Hello.Repo,
-  url: database_url,
+  database: "hello",
+  hostname: "localhost",
+  username: "root",
+  password: "",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
