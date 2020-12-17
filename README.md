@@ -9,6 +9,7 @@ Phase 1
     Python  - FastAPI  
     golang  - gin  
     clojure - luminous  
+    java    - quarkus, helidon-se, helidon-mp, micronaut
 
 Phase 2  
     Add OpenTelemetry, Zipkin backend
