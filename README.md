@@ -4,11 +4,11 @@ A place to play with the latest microservices fads.
 
 ## Phase 1  
     Write up some basic microservices across languages / fws, with REST endpoint  
-    Elixir  - [Phoenix](./elixir/hello)  
-    NodeJS  - express  
-    Python  - FastAPI  
-    golang  - gin  
-    clojure - luminous  
+    Elixir  - [Phoenix](/elixir/hello) - 
+    NodeJS  - express - Generate / Fetch random single sentences
+    Python  - FastAPI - Generate / Fetch random images
+    golang  - gin - Combine results and respond
+    clojure - luminous - Fetch current time in a random time zone  
     java    - quarkus, helidon-se, helidon-mp, micronaut
 
 ## Phase 2  
