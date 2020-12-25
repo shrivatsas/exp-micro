@@ -14,6 +14,8 @@ Phase 1
 Phase 2  
     Add OpenTelemetry, Zipkin backend
     https://github.com/open-telemetry/opentelemetry-js/blob/master/getting-started/README.md
+    docker run -d -p 9411:9411 openzipkin/zipkin
+    docker run -d -p5775:5775/udp -p6831:6831/udp -p6832:6832/udp -p5778:5778 -p16686:16686 -p14268:14268 jaegertracing/all-in-one:latest
 
 Phase 3  
     Add Dockerfile
