@@ -7,7 +7,7 @@ A place to play with the latest microservices fads.
     NodeJS  (3001) - express - Generate / Fetch random single sentences
     Python  (3002) - FastAPI - Generate / Fetch random images
     clojure (3003) - luminous - Fetch current time in a random time zone  
-    golang  - gin - Combine results and respond    
+    golang  (8000) - gin - Combine results and respond    
     Elixir  - [Phoenix](/elixir/hello) - 
     java    - quarkus, helidon-se, helidon-mp, micronaut
 

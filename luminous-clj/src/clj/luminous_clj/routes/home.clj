@@ -13,11 +13,20 @@
   (layout/render request "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
 
 (defn fetch-time [request]
-  {
-    :status 200
-    :headers {"Content-Type" "text/plain"}
-    :body ((json/decode (:body (client/get (str "http://worldtimeapi.org/api/timezone/" "America/Curacao")))) "datetime")
-  })
+  (let [resp (client/get (str "http://worldtimeapi.org/api/timezone/" "America/Curacao") {:throw-exceptions false})]
+  (if (= 200 (:status resp)) 
+    {
+      :status 200
+      :headers {"Content-Type" "text/plain"}
+      :body ((json/decode 
+              (:body resp)) 
+                "datetime")
+    }
+    {
+      :status 400
+      :headers {"Content-Type" "text/plain"}
+      :body "Bad Request"
+    })))
   
 (defn about-page [request]
   (layout/render request "about.html"))
