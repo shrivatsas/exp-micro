@@ -1,9 +1,15 @@
 # luminous-clj
-
 generated using Luminus version "3.85"
 
-FIXME
+`lein new luminus luminous-clj +h2 +immutant`
 
+## Fetch random time
+1. From a set of third parties
+    * http://worldclockapi.com/
+    * https://worldtimeapi.org/
+    * https://timezonedb.com/api
+2. From local data
+    *   
 ## Prerequisites
 
 You will need [Leiningen][1] 2.0 or above installed.
