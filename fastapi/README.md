@@ -1,3 +1,5 @@
+uvicorn main:app --reload --port 3002
+
 ## Fetch random images
 1. From a set of third parties
   * https://source.unsplash.com/random
