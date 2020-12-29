@@ -34,27 +34,22 @@ func initTracer(url string) {
 func fetchFacts(ch chan string) {
 	resp, _ := http.Get("http://localhost:3001/random")
 	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("Found facts")
 	defer resp.Body.Close()
-	fmt.Println("Fetch facts")
 	ch <- string(body)
 }
 
 func fetchImage(ch chan []byte) {
 	resp, _ := http.Get("http://localhost:3002/random")
 	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("Found image")
 	defer resp.Body.Close()
 	ch <- body
-	fmt.Println("Fetch image")
+	fmt.Println("Found image")
 }
 
 func fetchDatetime(ch chan string) {
 	resp, _ := http.Get("http://localhost:3003/random")
 	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("Found datetime")
 	defer resp.Body.Close()
-	fmt.Println("Fetch datetime")
 	ch <- string(body)
 }
 
@@ -72,15 +67,16 @@ func main() {
 		})
 	})
 	r.GET("/random", func(c *gin.Context) {
-		// ich := make(chan []byte)
+		ich := make(chan []byte)
 		fch := make(chan string)
 		dch := make(chan string)
 		go fetchDatetime(dch)
 		go fetchFacts(fch)
-		// go fetchImage(ich)
+		go fetchImage(ich)
 		facts := <-fch
 		dt := <-dch
-		// close(ich)
+		img := <-ich
+		close(ich)
 		close(fch)
 		close(dch)
 		c.JSON(200, gin.H{

@@ -25,7 +25,7 @@ A place to play with the latest microservices fads.
     Add CircuitBreaker and Client side load balancing
 
 ## Phase 4  
-    Add ServiceDiscovery with Consul  
+    Add ServiceDiscovery with Consul
 
 ## Phase 5  
     Add gRPC
