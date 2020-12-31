@@ -22,6 +22,10 @@ To start a web server for the application, run:
 
     lein run -p 3003
 
+To package the application, run:
+
+    lein uberjar    
+
 ## License
 
 Copyright © 2020 FIXME

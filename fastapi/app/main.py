@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
-from PIL import Image
 from io import BytesIO
 import httpx
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
@@ -12,10 +11,10 @@ from opentelemetry.sdk.trace.export import BatchExportSpanProcessor
 trace.set_tracer_provider(TracerProvider())
 
 zipkin_exporter = zipkin.ZipkinSpanExporter(
-    service_name="my-helloworld-service",
-    host_name="localhost",
-    port=9411,
-    endpoint='/api/v2/spans'
+    service_name="image-service",
+    # host_name="localhost",
+    # port=9411,
+    # endpoint='/api/v2/spans'
 )
 
 trace.get_tracer_provider().add_span_processor(

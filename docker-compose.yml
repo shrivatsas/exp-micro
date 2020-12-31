@@ -1,58 +1,24 @@
 version: "3.3"
 
 services:
-  elixir:
-    build:
-      context: ./elixir/
-      dockerfile: Dockerfile
-    env_file:
-      - .env
-
   express:
     build:
       context: ./expressjs/
       dockerfile: Dockerfile
-    env_file:
-      - .env
 
   fastapi:
     build:
       context: ./fastapi/
       dockerfile: Dockerfile
-    env_file:
-      - .env
 
   gin:
     build:
       context: ./go/
       dockerfile: Dockerfile
-    env_file:
-      - .env
-
-  helidon-se:
-    build:
-      context: ./helidon-se/
-      dockerfile: Dockerfile
-    env_file:
-      - .env
 
   luminous:
     build:
       context: ./luminous-clj/
       dockerfile: Dockerfile
-    env_file:
-      - .env
-
-  micronaut:
-    build:
-      context: ./micronaut/
-      dockerfile: Dockerfile
-    env_file:
-      - .env
-
-  quarkus:
-    build:
-      context: ./quarkus/
-      dockerfile: Dockerfile
-    env_file:
-      - .env
+    environment:
+      "database-url": "jdbc:h2:./luminous_clj_dev.db"

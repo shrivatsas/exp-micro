@@ -75,7 +75,8 @@ func main() {
 		go fetchImage(ich)
 		facts := <-fch
 		dt := <-dch
-		img := <-ich
+		// img := <-ich
+
 		close(ich)
 		close(fch)
 		close(dch)
