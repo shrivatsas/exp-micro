@@ -7,7 +7,16 @@
     "axios": "^0.21.1",
     "express": "^4.17.1",
     "livereload": "^0.9.1",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "@opentelemetry/core": "*",
+    "@opentelemetry/node": "*", 
+    "@opentelemetry/plugin-http": "*", 
+    "@opentelemetry/plugin-https": "*", 
+    "@opentelemetry/plugin-express": "*", 
+    "@opentelemetry/metrics": "*", 
+    "@opentelemetry/tracing": "*",
+    "@opentelemetry/exporter-prometheus": "*",
+    "@opentelemetry/exporter-zipkin": "*"
   },
   "devDependencies": {},
   "scripts": {
