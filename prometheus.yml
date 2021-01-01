@@ -1,0 +1,9 @@
+scrape_configs:
+  - job_name: phoenix
+  - job_name: express
+  - job_name: fastapi
+  - job_name: gonic
+  - job_name: helidon
+  - job_name: luminous
+  - job_name: micronaut
+  - job_name: quarkus

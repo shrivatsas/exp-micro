@@ -5,16 +5,22 @@ services:
     build:
       context: ./expressjs/
       dockerfile: Dockerfile
+    networks: 
+      - microexp
 
   fastapi:
     build:
       context: ./fastapi/
       dockerfile: Dockerfile
+    networks: 
+      - microexp
 
   gin:
     build:
       context: ./go/
       dockerfile: Dockerfile
+    networks: 
+      - microexp
 
   luminous:
     build:
@@ -22,18 +28,103 @@ services:
       dockerfile: Dockerfile
     environment:
       "database-url": "jdbc:h2:./luminous_clj_dev.db"
+    networks: 
+      - microexp
 
   helidon-se:
     build:
       context: ./helidon-se/
       dockerfile: Dockerfile
+    networks: 
+      - microexp
 
   micronaut:
     build:
       context: ./micronaut/
       dockerfile: Dockerfile
+    networks: 
+      - microexp
 
   quarkus:
     build:
       context: ./quarkus/
       dockerfile: src/main/docker/Dockerfile.jvm
+    networks: 
+      - microexp
+
+  zipkin:
+    image: openzipkin/zipkin:latest
+    ports:
+      - "9411:9411"
+    networks: 
+      - microexp
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "5775:5775/udp" 
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "16686:16686"
+      - "14268:14268"
+    networks: 
+      - microexp
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks: 
+      - microexp
+
+  consul-agent-1: &consul-agent
+    image: consul:latest
+    networks:
+      - microexp
+    command: "agent -retry-join consul-server-bootstrap -client 0.0.0.0"
+
+  consul-agent-2:
+    <<: *consul-agent
+
+  consul-agent-3:
+    <<: *consul-agent
+
+  consul-server-1: &consul-server
+    <<: *consul-agent
+    command: "agent -server -retry-join consul-server-bootstrap -client 0.0.0.0"
+
+  consul-server-2:
+    <<: *consul-server
+
+  consul-server-bootstrap:
+    <<: *consul-agent
+    ports:
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:8600"
+      - "8600:8600/udp"
+    command: "agent -server -bootstrap-expect 3 -ui -client 0.0.0.0"
+
+  ambassador:
+    image: docker.io/datawire/aes:1.9.1
+    command:
+      - --demo
+    ports:
+      - "8080:8080"
+    networks:
+      - microexp
+
+  nats:
+    image: nats:latest
+    ports:
+      - "4222:4222"
+    networks: 
+      - microexp
+
+networks:
+  microexp: {}
