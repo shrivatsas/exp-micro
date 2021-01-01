@@ -17,17 +17,23 @@ A place to play with the latest microservices fads.
 ## Phase 2  
     Add OpenTelemetry, Zipkin / Jaeger backend
     https://github.com/open-telemetry/opentelemetry-js/blob/master/getting-started/README.md
-    docker run -d -p 9411:9411 openzipkin/zipkin
-    docker run -d -p5775:5775/udp -p6831:6831/udp -p6832:6832/udp -p5778:5778 -p16686:16686 -p14268:14268 jaegertracing/all-in-one:latest
+    Jaeger UI : http://localhost:16686/
+    Zipkin UI : http://localhost:9411/zipkin/
 
 ## Phase 3  
-    Add Dockerfile  
+    Monitoring using Prometheus
+    Prometheus UI : http://localhost:9090/graph
     Add CircuitBreaker and Client side load balancing
 
 ## Phase 4  
-    Add ServiceDiscovery with Consul
+    Consul UI : http://localhost:8500/ui/
+    Service Discovery, Configuration and Segmentation.
+    Agents as Clients, Servers and Proxies.
 
 ## Phase 5  
+    API Gateway : Ambassador
+    https://www.getambassador.io/docs/latest/topics/install/
+
     Add gRPC
 
 ## Phase 6  
