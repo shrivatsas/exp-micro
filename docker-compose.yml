@@ -22,3 +22,18 @@ services:
       dockerfile: Dockerfile
     environment:
       "database-url": "jdbc:h2:./luminous_clj_dev.db"
+
+  helidon-se:
+    build:
+      context: ./helidon-se/
+      dockerfile: Dockerfile
+
+  micronaut:
+    build:
+      context: ./micronaut/
+      dockerfile: Dockerfile
+
+  quarkus:
+    build:
+      context: ./quarkus/
+      dockerfile: src/main/docker/Dockerfile.jvm
