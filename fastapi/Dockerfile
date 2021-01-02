@@ -3,6 +3,7 @@ FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7-alpine3.8
 COPY . /app
 RUN apk update
 RUN apk --no-cache add gcc musl-dev
+ENV PORT=3002
 
 # Install Poetry
 RUN wget -q -O - https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
@@ -11,4 +12,5 @@ RUN poetry config virtualenvs.create false
 
 RUN poetry install --no-root --no-dev
 
+EXPOSE 3002
 ENV PYTHONPATH=/app

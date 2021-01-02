@@ -12,4 +12,5 @@ RUN mkdir assets
 COPY assets/package.json assets
 COPY assets/package-lock.json assets
 
+EXPOSE 9000
 CMD mix deps.get && cd assets && npm install && cd .. && mix phx.server
