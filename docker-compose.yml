@@ -5,6 +5,12 @@ services:
     build:
       context: ./elixir/hello/
       dockerfile: Dockerfile
+    environment:
+      "DATABASE_URL": "mysql://elixir:elixirpwd@mysql:3306/hello"
+      "PORT": 9000
+      "SECRET_KEY_BASE": "86bZ4yCHNNFeJX5YUS2qCPhVsbet1biuBVkITnDvIUHEaBU4vPbsBj7PGrY2rDwI"
+    depends_on: 
+      - mysql
     networks: 
       - microexp
       
@@ -133,6 +139,22 @@ services:
     networks: 
       - microexp
 
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpwd
+      MYSQL_USER: elixir
+      MYSQL_PASSWORD: elixirpwd
+      MYSQL_DATABASE: hello
+    volumes: 
+      - mysqlvol:/var/lib/mysql
+    networks: 
+      - microexp
+
 networks:
   microexp:
     name: microexp
+
+volumes:
+  mysqlvol:
+    name: mysql01    
