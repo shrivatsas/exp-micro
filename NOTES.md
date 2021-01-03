@@ -7,3 +7,5 @@
     docker network ls
 
     docker ps --format 'table {{.ID}}\t{{.Names}}'
+
+    docker inspect <container-name> --format '{{.NetworkSettings.Networks.microexp.IPAddress}}'

@@ -61,7 +61,7 @@ services:
   quarkus:
     build:
       context: ./quarkus/
-      dockerfile: src/main/docker/Dockerfile.jvm
+      dockerfile: src/main/docker/Dockerfile.multistage
     networks: 
       - microexp
 
