@@ -9,10 +9,9 @@ A place to play with the latest microservices fads.
     clojure (3003) - luminous - Fetch current time in a random time zone  
     golang  (8000) - gin - Combine results and respond    
     Elixir  (9000) - phoenix - chat service to fetch images / text / times
-    java () - quarkus - Fetch random stock ticks
-    java () - helidon-se - Fetch random cricket scores
-    java () - helidon-mp - Fetch 
-    java () - micronaut - Fetch
+    java (3004) - quarkus - Fetch random stock ticks
+    java (3005) - helidon-se - Fetch random cricket scores
+    java (3006) - micronaut - Fetch
 
 ## Phase 2  
     Add OpenTelemetry, Zipkin / Jaeger backend
@@ -32,9 +31,11 @@ A place to play with the latest microservices fads.
 
 ## Phase 5  
     API Gateway : Ambassador
+    Ambassador UI : http://localhost:8080
     https://www.getambassador.io/docs/latest/topics/install/
 
     Add gRPC
 
 ## Phase 6  
+    Setup NATS
     Add Message Broker        

@@ -1,6 +1,19 @@
 version: "3.3"
 
 services:
+  elixir:
+    build:
+      context: ./elixir/hello/
+      dockerfile: Dockerfile
+    environment:
+      "DATABASE_URL": "mysql://elixir:elixirpwd@mysql:3306/hello"
+      "PORT": 9000
+      "SECRET_KEY_BASE": "86bZ4yCHNNFeJX5YUS2qCPhVsbet1biuBVkITnDvIUHEaBU4vPbsBj7PGrY2rDwI"
+    depends_on: 
+      - mysql
+    networks: 
+      - microexp
+      
   express:
     build:
       context: ./expressjs/
@@ -48,7 +61,7 @@ services:
   quarkus:
     build:
       context: ./quarkus/
-      dockerfile: src/main/docker/Dockerfile.jvm
+      dockerfile: src/main/docker/Dockerfile.multistage
     networks: 
       - microexp
 
@@ -82,42 +95,42 @@ services:
     networks: 
       - microexp
 
-  consul-agent-1: &consul-agent
-    image: consul:latest
-    networks:
-      - microexp
-    command: "agent -retry-join consul-server-bootstrap -client 0.0.0.0"
+  # consul-agent-1: &consul-agent
+  #   image: consul:latest
+  #   networks:
+  #     - microexp
+  #   command: "agent -retry-join consul-server-bootstrap -client 0.0.0.0"
 
-  consul-agent-2:
-    <<: *consul-agent
+  # consul-agent-2:
+  #   <<: *consul-agent
 
-  consul-agent-3:
-    <<: *consul-agent
+  # consul-agent-3:
+  #   <<: *consul-agent
 
-  consul-server-1: &consul-server
-    <<: *consul-agent
-    command: "agent -server -retry-join consul-server-bootstrap -client 0.0.0.0"
+  # consul-server-1: &consul-server
+  #   <<: *consul-agent
+  #   command: "agent -server -retry-join consul-server-bootstrap -client 0.0.0.0"
 
-  consul-server-2:
-    <<: *consul-server
+  # consul-server-2:
+  #   <<: *consul-server
 
-  consul-server-bootstrap:
-    <<: *consul-agent
-    ports:
-      - "8400:8400"
-      - "8500:8500"
-      - "8600:8600"
-      - "8600:8600/udp"
-    command: "agent -server -bootstrap-expect 3 -ui -client 0.0.0.0"
+  # consul-server-bootstrap:
+  #   <<: *consul-agent
+  #   ports:
+  #     - "8400:8400"
+  #     - "8500:8500"
+  #     - "8600:8600"
+  #     - "8600:8600/udp"
+  #   command: "agent -server -bootstrap-expect 3 -ui -client 0.0.0.0"
 
-  ambassador:
-    image: docker.io/datawire/aes:1.9.1
-    command:
-      - --demo
-    ports:
-      - "8080:8080"
-    networks:
-      - microexp
+  # ambassador:
+  #   image: docker.io/datawire/aes:1.9.1
+  #   command:
+  #     - --demo
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - microexp
 
   nats:
     image: nats:latest
@@ -126,5 +139,22 @@ services:
     networks: 
       - microexp
 
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpwd
+      MYSQL_USER: elixir
+      MYSQL_PASSWORD: elixirpwd
+      MYSQL_DATABASE: hello
+    volumes: 
+      - mysqlvol:/var/lib/mysql
+    networks: 
+      - microexp
+
 networks:
-  microexp: {}
+  microexp:
+    name: microexp
+
+volumes:
+  mysqlvol:
+    name: mysql01    
