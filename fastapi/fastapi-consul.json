@@ -1,18 +1,15 @@
 {
-    "service": {
-        "name": "fastapi",
-        "port": 3002,
-        "tags": [
-            "web",
-            "application",
-            "urlprefix-/web"
-        ],
-        "check": {
-            "id": "web_app_status",
-            "name": "Web Application Status",
-            "tcp": "localhost:3002",
-            "interval": "30s",
-            "timeout": "20s"
-        }
+    "name": "fastapi",
+    "port": 3002,
+    "tags": [
+        "web",
+        "application",
+        "urlprefix-/web"
+    ],
+    "check": {
+        "name": "Web Application Status",
+        "tcp": "<ipaddress>:3002",
+        "interval": "30s",
+        "timeout": "20s"
     }
 }

@@ -1,6 +1,6 @@
 {
-    "name": "express",
-    "port": 3001,
+    "name": "micronaut",
+    "port": 3006,
     "tags": [
         "web",
         "application",
@@ -8,7 +8,7 @@
     ],
     "check": {
         "name": "Web Application Status",
-        "tcp": "<ipaddress>:3001",
+        "tcp": "<ipaddress>:3006",
         "interval": "30s",
         "timeout": "20s"
     }
