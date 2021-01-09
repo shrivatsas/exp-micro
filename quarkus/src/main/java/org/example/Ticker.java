@@ -12,11 +12,8 @@ import org.eclipse.microprofile.metrics.annotation.Counted;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.io.InputStream;
+import java.util.*;
 
 @Path("/random")
 public class Ticker {
@@ -27,12 +24,13 @@ public class Ticker {
 
     Ticker(FinnhubService in) {
         this.finnhubService = in;
-        this.stocks = Arrays.asList("Y|FB","Y|AAPL","Y|AMZN","Y|NFLX","Y|GOOG","Y|MSFT");
-//        try {
-//            this.stocks = Files.readAllLines(Paths.get("stock.json"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        this.stocks = new ArrayList<>();
+        InputStream ins = getClass().getResourceAsStream("/stocks.json");
+        Scanner st = new Scanner(ins).useDelimiter(",");
+
+        while(st.hasNext()) {
+            stocks.add(st.next().replace("\"",""));
+        }
     }
 
     @GET

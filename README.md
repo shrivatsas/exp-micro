@@ -11,7 +11,7 @@ A place to play with the latest microservices fads.
     Elixir  (9000) - phoenix - chat service to fetch images / text / times
     java (3004) - quarkus - Fetch random stock ticks
     java (3005) - helidon-se - Fetch random cricket scores
-    java (3006) - micronaut - Fetch
+    java (3006) - micronaut - Generate a random color
 
 ## Phase 2  
     Add OpenTelemetry, Zipkin / Jaeger backend
