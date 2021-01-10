@@ -81,6 +81,7 @@ public final class Main {
     private static Routing createRouting(Config config) {
         MetricsSupport metrics = MetricsSupport.create();
         GreetService greetService = new GreetService(config);
+        QuoteService quoteService = new QuoteService();
         HealthSupport health = HealthSupport.builder()
                 .addLiveness(HealthChecks.healthChecks())   // Adds a convenient set of checks
                 .build();
@@ -89,6 +90,7 @@ public final class Main {
                 .register(health)                   // Health at "/health"
                 .register(metrics)                  // Metrics at "/metrics"
                 .register("/greet", greetService)
+                .register("/random", quoteService)
                 .build();
     }
 
