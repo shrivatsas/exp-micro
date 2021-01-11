@@ -11,3 +11,5 @@ docker inspect micro-exp_helidon-se_1 --format '{{.NetworkSettings.Networks.micr
 docker inspect micro-exp_luminous_1 --format '{{.NetworkSettings.Networks.microexp.IPAddress}}' | xargs -I '{}' sed 's/<ipaddress>/{}/' luminous-clj/luminous-consul.json | curl --request PUT --data-binary @- http://localhost:8500/v1/agent/service/register
 
 docker inspect micro-exp_micronaut_1 --format '{{.NetworkSettings.Networks.microexp.IPAddress}}' | xargs -I '{}' sed 's/<ipaddress>/{}/' micronaut/micronaut-consul.json | curl --request PUT --data-binary @- http://localhost:8500/v1/agent/service/register
+
+docker inspect micro-exp_elixir_1 --format '{{.NetworkSettings.Networks.microexp.IPAddress}}' | xargs -I '{}' sed 's/<ipaddress>/{}/' elixir/hello/elixir-consul.json | curl --request PUT --data-binary @- http://localhost:8500/v1/agent/service/register
