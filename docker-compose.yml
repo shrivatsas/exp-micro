@@ -1,62 +1,83 @@
-version: "3.3"
+version: "3.8"
 
 services:
-  elixir:
-    build:
-      context: ./elixir/hello/
-      dockerfile: Dockerfile
-    environment:
-      "DATABASE_URL": "mysql://elixir:elixirpwd@mysql:3306/hello"
-      "PORT": 9000
-      "SECRET_KEY_BASE": "86bZ4yCHNNFeJX5YUS2qCPhVsbet1biuBVkITnDvIUHEaBU4vPbsBj7PGrY2rDwI"
-    depends_on: 
-      - mysql
-    networks: 
-      - microexp
+  consul-agent-1:
+    image: consul:latest
+    command: "agent -retry-join consul-server-bootstrap -client 0.0.0.0"
+    networks:
+      microexp:
+        ipv4_address: "172.22.0.21"
+
+  consul-agent-2:
+    image: consul:latest
+    command: "agent -retry-join consul-server-bootstrap -client 0.0.0.0"
+    networks:
+      microexp:
+        ipv4_address: "172.22.0.22"
+
+  consul-agent-3:
+    image: consul:latest
+    command: "agent -retry-join consul-server-bootstrap -client 0.0.0.0"
+    networks:
+      microexp:
+        ipv4_address: "172.22.0.23"
+
+  # elixir:
+  #   build:
+  #     context: ./elixir/hello/
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     "DATABASE_URL": "mysql://elixir:elixirpwd@mysql:3306/hello"
+  #     "PORT": 9000
+  #     "SECRET_KEY_BASE": "86bZ4yCHNNFeJX5YUS2qCPhVsbet1biuBVkITnDvIUHEaBU4vPbsBj7PGrY2rDwI"
+  #   depends_on: 
+  #     - mysql
+  #   networks: 
+  #     - microexp
       
-  express:
-    build:
-      context: ./expressjs/
-      dockerfile: Dockerfile
-    networks: 
-      - microexp
+  # express:
+  #   build:
+  #     context: ./expressjs/
+  #     dockerfile: Dockerfile
+  #   networks: 
+  #     - microexp
 
-  fastapi:
-    build:
-      context: ./fastapi/
-      dockerfile: Dockerfile
-    networks: 
-      - microexp
+  # fastapi:
+  #   build:
+  #     context: ./fastapi/
+  #     dockerfile: Dockerfile
+  #   networks: 
+  #     - microexp
 
-  gin:
-    build:
-      context: ./go/
-      dockerfile: Dockerfile
-    networks: 
-      - microexp
+  # gin:
+  #   build:
+  #     context: ./go/
+  #     dockerfile: Dockerfile
+  #   networks: 
+  #     - microexp
 
-  luminous:
-    build:
-      context: ./luminous-clj/
-      dockerfile: Dockerfile
-    environment:
-      "database-url": "jdbc:h2:./luminous_clj_dev.db"
-    networks: 
-      - microexp
+  # luminous:
+  #   build:
+  #     context: ./luminous-clj/
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     "database-url": "jdbc:h2:./luminous_clj_dev.db"
+  #   networks: 
+  #     - microexp
 
-  helidon-se:
-    build:
-      context: ./helidon-se/
-      dockerfile: Dockerfile
-    networks: 
-      - microexp
+  # helidon-se:
+  #   build:
+  #     context: ./helidon-se/
+  #     dockerfile: Dockerfile
+  #   networks: 
+  #     - microexp
 
-  micronaut:
-    build:
-      context: ./micronaut/
-      dockerfile: Dockerfile
-    networks: 
-      - microexp
+  # micronaut:
+  #   build:
+  #     context: ./micronaut/
+  #     dockerfile: Dockerfile
+  #   networks: 
+  #     - microexp
 
   quarkus:
     build:
@@ -95,27 +116,25 @@ services:
     networks: 
       - microexp
 
-  consul-agent-1: &consul-agent
+  consul-server-1:
     image: consul:latest
-    networks:
-      - microexp
-    command: "agent -retry-join consul-server-bootstrap -client 0.0.0.0"
-
-  consul-agent-2:
-    <<: *consul-agent
-
-  consul-agent-3:
-    <<: *consul-agent
-
-  consul-server-1: &consul-server
-    <<: *consul-agent
     command: "agent -server -retry-join consul-server-bootstrap -client 0.0.0.0"
+    # networks:
+    #   microexp:
+    #     ipv4_address: "172.22.0.4"
 
   consul-server-2:
-    <<: *consul-server
+    image: consul:latest
+    command: "agent -server -retry-join consul-server-bootstrap -client 0.0.0.0"
+    # networks:
+    #   microexp:
+    #     ipv4_address: "172.22.0.5"
 
   consul-server-bootstrap:
-    <<: *consul-agent
+    image: consul:latest
+    # networks:
+    #   microexp:
+    #     ipv4_address: "172.22.0.6"
     ports:
       - "8400:8400"
       - "8500:8500"
@@ -154,6 +173,10 @@ services:
 networks:
   microexp:
     name: microexp
+    ipam:
+      driver: default
+      config: 
+        - subnet: "172.22.0.0/32"
 
 volumes:
   mysqlvol:

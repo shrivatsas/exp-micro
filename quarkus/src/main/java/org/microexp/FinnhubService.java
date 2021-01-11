@@ -1,5 +1,6 @@
-package org.example;
+package org.microexp;
 
+import org.microexp.model.Quote;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

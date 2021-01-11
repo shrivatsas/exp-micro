@@ -1,5 +1,6 @@
-package org.example;
+package org.microexp.configuration;
 
+import org.microexp.FinnhubService;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 

@@ -1,7 +1,9 @@
-package org.example;
+package org.microexp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@Data
 public class Quote {
     @JsonProperty("c")
     Double current;

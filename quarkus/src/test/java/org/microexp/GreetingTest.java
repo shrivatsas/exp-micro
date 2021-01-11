@@ -1,4 +1,4 @@
-package org.example;
+package org.microexp;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;

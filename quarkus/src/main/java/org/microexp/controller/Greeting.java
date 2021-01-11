@@ -1,4 +1,4 @@
-package org.example;
+package org.microexp.controller;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

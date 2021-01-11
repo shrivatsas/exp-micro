@@ -1,4 +1,4 @@
-package org.example;
+package org.microexp.controller;
 
 import org.jboss.logging.Logger;
 
@@ -10,6 +10,8 @@ import javax.ws.rs.core.MediaType;
 import org.eclipse.microprofile.metrics.MetricUnits;
 import org.eclipse.microprofile.metrics.annotation.Counted;
 import org.eclipse.microprofile.metrics.annotation.Timed;
+import org.microexp.FinnhubService;
+import org.microexp.model.Quote;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +45,7 @@ public class Ticker {
         String stock = stocks.get(idx).split("\\|")[1];
         try {
             Quote q = finnhubService.quote(stock).execute().body();
-            currentQuote = String.valueOf(q.current);
+            currentQuote = String.valueOf(q.getCurrent());
         } catch (IOException e) {
             e.printStackTrace();
         }
