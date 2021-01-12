@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.example</groupId>
-  <artifactId>demo</artifactId>
+  <groupId>com.microexp</groupId>
+  <artifactId>micronaut</artifactId>
   <version>0.1</version>
   <packaging>${packaging}</packaging>
 
@@ -18,7 +18,7 @@
     <jdk.version>11</jdk.version>
     <release.version>11</release.version>
     <micronaut.version>2.2.1</micronaut.version>
-    <exec.mainClass>com.example.Application</exec.mainClass>
+    <exec.mainClass>com.microexp.Application</exec.mainClass>
     <micronaut.runtime>netty</micronaut.runtime>
   </properties>
 
@@ -70,6 +70,11 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
+      <groupId>io.micronaut.discovery</groupId>
+      <artifactId>micronaut-discovery-client</artifactId>
+      <version>2.2.0</version>
+    </dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <scope>test</scope>
@@ -101,8 +106,8 @@
           <annotationProcessorPaths combine.children="append">
           </annotationProcessorPaths>
           <compilerArgs>
-            <arg>-Amicronaut.processing.group=com.example</arg>
-            <arg>-Amicronaut.processing.module=demo</arg>
+            <arg>-Amicronaut.processing.group=com.microexp</arg>
+            <arg>-Amicronaut.processing.module=micronaut</arg>
           </compilerArgs>
         </configuration>
       </plugin>

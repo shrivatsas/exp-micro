@@ -1,10 +1,10 @@
-package com.example.controller;
+
+package com.microexp.controller;
 
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Collectors;
 

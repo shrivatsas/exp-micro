@@ -82,7 +82,7 @@ services:
   quarkus:
     build:
       context: ./quarkus/
-      dockerfile: src/main/docker/Dockerfile.multistage
+      dockerfile: src/main/docker/Dockerfile.jvm
     networks: 
       - microexp
 
@@ -119,22 +119,19 @@ services:
   consul-server-1:
     image: consul:latest
     command: "agent -server -retry-join consul-server-bootstrap -client 0.0.0.0"
-    # networks:
-    #   microexp:
-    #     ipv4_address: "172.22.0.4"
+    networks:
+      microexp:
 
   consul-server-2:
     image: consul:latest
     command: "agent -server -retry-join consul-server-bootstrap -client 0.0.0.0"
-    # networks:
-    #   microexp:
-    #     ipv4_address: "172.22.0.5"
+    networks:
+      microexp:
 
   consul-server-bootstrap:
     image: consul:latest
-    # networks:
-    #   microexp:
-    #     ipv4_address: "172.22.0.6"
+    networks:
+      microexp:
     ports:
       - "8400:8400"
       - "8500:8500"

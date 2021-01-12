@@ -30,7 +30,7 @@ public class AppConfiguration {
             .withMultipleHostAndPort(Set.of(
                     HostAndPort.fromString("172.22.0.21:8500"),
                     HostAndPort.fromString("172.22.0.22:8500"),
-                    HostAndPort.fromString("172.22.0.23:8500")), 5000)
+                    HostAndPort.fromString("172.22.0.23:8500")), 60000)
             .build();
 
     @ConfigProperty(name = "quarkus.application.name")
@@ -39,20 +39,28 @@ public class AppConfiguration {
     @ConfigProperty(name = "quarkus.application.version")
     String appVersion;
 
+    @ConfigProperty(name = "quarkus.http.port")
+    int port;
+
     void onStart(@Observes StartupEvent ev) {
         ScheduledExecutorService executorService = Executors
                 .newSingleThreadScheduledExecutor();
         executorService.schedule(() -> {
+            LOG.info("Running the thread");
             HealthClient healthClient = consulClient.healthClient();
             List<ServiceHealth> instances = healthClient
                     .getHealthyServiceInstances(appName).getResponse();
+            LOG.info(instances.toString());
             instanceId = appName + "-" + instances.size();
+
+            LOG.info("Vals " + instanceId + appName + appVersion + port);
             ImmutableRegistration registration = ImmutableRegistration.builder()
                     .id(instanceId)
                     .name(appName)
-                    .port(Integer.parseInt(System.getProperty("quarkus.http.port")))
+                    .port(port)
                     .putMeta("version", appVersion)
                     .build();
+            LOG.info("Off to register");
             consulClient.agentClient().register(registration);
             LOG.info(String.format("Instance registered: id= %s", registration.getId()));
         }, 5000, TimeUnit.MILLISECONDS);
