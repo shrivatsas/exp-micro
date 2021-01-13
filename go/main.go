@@ -2,14 +2,20 @@ package main
 
 import (
 	// "html/template"
+	"context"
 	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"time"
 	// "sync"
 
 	"github.com/gin-gonic/gin"
+	"github.com/hashicorp/consul/api"
+	"github.com/hashicorp/consul/connect"
 	gintrace "go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin"
 	otelglobal "go.opentelemetry.io/otel/api/global"
 	// oteltrace "go.opentelemetry.io/otel/api/trace"
@@ -56,6 +62,10 @@ func fetchDatetime(ch chan string) {
 func main() {
 	url := flag.String("zipkin", "http://localhost:9411/api/v2/spans", "zipkin url")
 
+	client, _ := api.NewClient(api.DefaultConfig())
+	svc, _ := connect.NewService("go", client)
+	defer svc.Close()
+
 	flag.Parse()
 
 	initTracer(*url)
@@ -85,5 +95,30 @@ func main() {
 			"datetime": dt,
 		})
 	})
-	r.Run(":8000") // listen and serve on 0.0.0.0:8000 (for windows "localhost:8000")
+
+	srv := &http.Server{
+		Addr:    ":8000",
+		Handler: r,
+	}
+
+	go func() {
+		// service connections
+		if err := srv.ListenAndServe(); err != nil {
+			log.Printf("listen: %s\n", err)
+		}
+	}()
+
+	// Wait for interrupt signal to gracefully shutdown the server with
+	// a timeout of 5 seconds.
+	quit := make(chan os.Signal)
+	signal.Notify(quit, os.Interrupt)
+	<-quit
+	log.Println("Shutdown Server ...")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatal("Server Shutdown:", err)
+	}
+	log.Println("Server exiting")
 }

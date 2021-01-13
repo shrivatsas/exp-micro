@@ -6,3 +6,4 @@ opentelemetry-exporter-prometheus
 opentelemetry-instrumentation-fastapi
 opentelemetry-instrumentation-aiohttp-client
 httpx==0.16
+python-consul2==0.1.5

@@ -42,12 +42,12 @@ services:
   #   networks: 
   #     - microexp
 
-  # fastapi:
-  #   build:
-  #     context: ./fastapi/
-  #     dockerfile: Dockerfile
-  #   networks: 
-  #     - microexp
+  fastapi:
+    build:
+      context: ./fastapi/
+      dockerfile: Dockerfile
+    networks: 
+      - microexp
 
   # gin:
   #   build:

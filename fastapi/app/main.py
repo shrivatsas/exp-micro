@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from io import BytesIO
+from consul import Consul
 import httpx
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry import trace
@@ -25,6 +26,17 @@ tracer = trace.get_tracer(__name__)
 
 app = FastAPI()
 client = httpx.AsyncClient()
+consul = Consul(host='172.22.0.21', port=8500)
+
+@app.on_event("startup")
+async def startup_event():
+    service = Consul.Agent.Service(consul.agent)
+    service.register("FastAPI", port=3002)
+
+@app.on_event("shutdown")
+def shutdown_event():
+    service = Consul.Agent.Service(consul.agent)
+    service.deregister("FastAPI")
 
 @app.get("/")
 async def root():
