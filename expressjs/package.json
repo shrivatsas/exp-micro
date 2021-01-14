@@ -9,14 +9,15 @@
     "livereload": "^0.9.1",
     "nodemon": "^2.0.6",
     "@opentelemetry/core": "*",
-    "@opentelemetry/node": "*", 
-    "@opentelemetry/plugin-http": "*", 
-    "@opentelemetry/plugin-https": "*", 
-    "@opentelemetry/plugin-express": "*", 
-    "@opentelemetry/metrics": "*", 
+    "@opentelemetry/node": "*",
+    "@opentelemetry/plugin-http": "*",
+    "@opentelemetry/plugin-https": "*",
+    "@opentelemetry/plugin-express": "*",
+    "@opentelemetry/metrics": "*",
     "@opentelemetry/tracing": "*",
     "@opentelemetry/exporter-prometheus": "*",
-    "@opentelemetry/exporter-zipkin": "*"
+    "@opentelemetry/exporter-zipkin": "*",
+    "consul": "*"
   },
   "devDependencies": {},
   "scripts": {
