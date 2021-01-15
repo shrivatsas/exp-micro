@@ -49,12 +49,12 @@ services:
     networks: 
       - microexp
 
-  # gin:
-  #   build:
-  #     context: ./go/
-  #     dockerfile: Dockerfile
-  #   networks: 
-  #     - microexp
+  gin:
+    build:
+      context: ./go/
+      dockerfile: Dockerfile
+    networks: 
+      - microexp
 
   # luminous:
   #   build:
@@ -72,12 +72,12 @@ services:
   #   networks: 
   #     - microexp
 
-  # micronaut:
-  #   build:
-  #     context: ./micronaut/
-  #     dockerfile: Dockerfile
-  #   networks: 
-  #     - microexp
+  micronaut:
+    build:
+      context: ./micronaut/
+      dockerfile: Dockerfile
+    networks: 
+      - microexp
 
   quarkus:
     build:
