@@ -25,3 +25,7 @@ A microservice platform can end up presenting a wide interface to consumers. Bad
 ## Phase 6: Higher tolerance
 
 An end-to-end REST API based synchronous system can be tightly coupled leading to cascading failures. The uptime costs in such a system can become too high. One way to design a more tolerant system is to reduce coupling using asynchronous and messaging system, the communication semantics change too. [more](docs/Phase6.md)
+
+## Tools and Usage
+
+Starting with Docker, Docker-Compose, language build systems (lein, maven, mix, ..), Github actions, DroneCI, etc. we explore lots of tools. This section captures a few advanced usages / syntax found useful. [more](docs/tools-advanced.md)
