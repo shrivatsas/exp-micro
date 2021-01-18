@@ -2,40 +2,26 @@
 
 A place to play with the latest microservices fads.
 
-## Phase 1  
-    Write up some basic microservices across languages / fws, with REST endpoint  
-    NodeJS  (3001) - express - Generate / Fetch random single sentences
-    Python  (3002) - fastAPI - Generate / Fetch random images
-    clojure (3003) - luminous - Fetch current time in a random time zone  
-    golang  (8000) - gin - Combine results and respond    
-    Elixir  (9000) - phoenix - chat service to fetch images / text / times
-    java (3004) - quarkus - Fetch random stock ticks
-    java (3005) - helidon-se - Fetch random cricket scores
-    java (3006) - micronaut - Generate a random color
+## Phase 1: The setup
 
-## Phase 2  
-    Add OpenTelemetry, Zipkin / Jaeger backend
-    https://github.com/open-telemetry/opentelemetry-js/blob/master/getting-started/README.md
-    Jaeger UI : http://localhost:16686/
-    Zipkin UI : http://localhost:9411/zipkin/
+Setup basic microservices across languages, each doing one thing - making an api call to 3rd party service, managing some business logic, responding to user input. [more](docs/Phase1.md)
 
-## Phase 3  
-    Monitoring using Prometheus
-    Prometheus UI : http://localhost:9090/graph
-    Add CircuitBreaker and Client side load balancing
+## Phase 2: Instrument
 
-## Phase 4  
-    Consul UI : http://localhost:8500/ui/
-    Service Discovery, Configuration and Segmentation.
-    Agents as Clients, Servers and Proxies.
+Microservices have a lot of moving parts, one way to keeping track of those is using logs and tracing. Logs involve aggregating messages explicitly written out by the system under observation. Tracing involves implicitly keeping track of control flow and parameters such as timing, variable values. Tracing data could be sampled or made available for all invocations. [more](docs/Phase2.md)
 
-## Phase 5  
-    API Gateway : Ambassador
-    Ambassador UI : http://localhost:8080
-    https://www.getambassador.io/docs/latest/topics/install/
+## Phase 3: Monitor  
 
-    Add gRPC
+Monitoring services is a operations imperative; tracking uptimes, latency, errors and other custom metrics. [more](docs/Phase3.md)
 
-## Phase 6  
-    Setup NATS
-    Add Message Broker        
+## Phase 4: Scale
+
+One of the promises of microservices is horizontal scaling, ie. increase number of instances proportionate to demand. This promise demands location transparency, online switch/failovers and backups. One way to achieve such properties is by using an independant tool for 'service discovery, configuration and segmentation'. [more](docs/Phase4.md)
+
+## Phase 5: Clean, Secure Interfaces
+
+A microservice platform can end up presenting a wide interface to consumers. Badly designed interface can end up blocking change management, be insecure, and hard to maintain. [more](docs/Phase5.md)
+
+## Phase 6: Higher tolerance
+
+An end-to-end REST API based synchronous system can be tightly coupled leading to cascading failures. The uptime costs in such a system can become too high. One way to design a more tolerant system is to reduce coupling using asynchronous and messaging system, the communication semantics change too. [more](docs/Phase6.md)
