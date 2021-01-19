@@ -29,3 +29,8 @@ An end-to-end REST API based synchronous system can be tightly coupled leading t
 ## Tools and Usage
 
 Starting with Docker, Docker-Compose, language build systems (lein, maven, mix, ..), Github actions, DroneCI, etc. we explore lots of tools. This section captures a few advanced usages / syntax found useful. [more](docs/tools-advanced.md)
+
+## Notable alternatives missed
+
+https://micro.mu/
+https://temporal.io/
