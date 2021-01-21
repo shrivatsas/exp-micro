@@ -16,3 +16,10 @@ consul:
       - "172.22.0.21:8500"
       - "172.22.0.22:8500"
       - "172.22.0.23:8500"
+tracing:
+  zipkin:
+    http:
+      url: http://localhost:9411
+    enabled: true
+    sampler:
+      probability: 1

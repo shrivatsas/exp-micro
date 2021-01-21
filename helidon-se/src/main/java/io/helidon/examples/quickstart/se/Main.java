@@ -3,6 +3,7 @@ package io.helidon.examples.quickstart.se;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.logging.LogManager;
 
 import io.helidon.config.Config;
@@ -10,6 +11,7 @@ import io.helidon.health.HealthSupport;
 import io.helidon.health.checks.HealthChecks;
 import io.helidon.media.jsonp.JsonpSupport;
 import io.helidon.metrics.MetricsSupport;
+import io.helidon.tracing.TracerBuilder;
 import io.helidon.webserver.Routing;
 import io.helidon.webserver.ServerConfiguration;
 import io.helidon.webserver.WebServer;
@@ -46,9 +48,15 @@ public final class Main {
         // By default this will pick up application.yaml from the classpath
         Config config = Config.create();
 
+        ServerConfiguration serverConfig = ServerConfiguration.builder(config.get("server"))
+                .tracer(TracerBuilder.create("helidon-se")
+                        .collectorUri(URI.create("http://127.0.0.1:9411"))
+                        .build())
+                .build();
+
         // Build server with JSONP support
         WebServer server = WebServer.builder(createRouting(config))
-                .config(config.get("server"))
+                .config(serverConfig)
                 .addMediaSupport(JsonpSupport.create())
                 .build();
 

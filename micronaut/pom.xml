@@ -74,6 +74,34 @@
       <artifactId>micronaut-discovery-client</artifactId>
       <version>2.2.0</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/io.micronaut/micronaut-tracing -->
+    <dependency>
+      <groupId>io.micronaut</groupId>
+      <artifactId>micronaut-tracing</artifactId>
+      <version>2.2.3</version>
+      <scope>implementation</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/io.zipkin.brave/brave-instrumentation-http -->
+    <dependency>
+      <groupId>io.zipkin.brave</groupId>
+      <artifactId>brave-instrumentation-http</artifactId>
+      <version>5.13.3</version>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/io.zipkin.reporter2/zipkin-reporter -->
+    <dependency>
+      <groupId>io.zipkin.reporter2</groupId>
+      <artifactId>zipkin-reporter</artifactId>
+      <version>2.16.3</version>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/io.opentracing.brave/brave-opentracing -->
+    <dependency>
+      <groupId>io.opentracing.brave</groupId>
+      <artifactId>brave-opentracing</artifactId>
+      <version>1.0.0</version>
+      <scope>implementation</scope>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>

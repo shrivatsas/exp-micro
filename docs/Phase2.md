@@ -10,7 +10,7 @@ Quarkus
     Uses Jaeger as a configuration
 
 Micronaut
-    TODO
+    Uses Zipkin library
 
 ExpressJS
     https://github.com/open-telemetry/opentelemetry-js/blob/master/getting-started/README.md
@@ -23,7 +23,7 @@ Gin
     Uses Zipkin library
 
 Helidon
-    TODO
+    Uses Zipkin library
 
 Luminous
     TODO

@@ -1,7 +1,23 @@
-
 app:
   greeting: "Hello"
-
 server:
   port: 3005
   host: 0.0.0.0
+tracing:
+  zipkin:
+    service: "helidon-se"
+    protocol: "https"
+    host: "192.168.1.1"
+    port: 9987
+    api-version: 1
+    # this is the default path for API version 2
+    path: "/api/v2/spans"
+    tags:
+      tag1: "tag1-value"
+      tag2: "tag2-value"
+    boolean-tags:
+      tag3: true
+      tag4: false
+    int-tags:
+      tag5: 145
+      tag6: 741
