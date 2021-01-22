@@ -3,14 +3,19 @@ defmodule Hello.MixProject do
 
   def project do
     [
-      app: :hello,
+      app: :phoenix,
       version: "0.1.0",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      releases: [
+        phoenix: [
+          applications: [opentelemetry: :temporary]
+        ]
+      ]
     ]
   end
 
@@ -45,7 +50,12 @@ defmodule Hello.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:consul, "~> 1.1"}
+      {:consul, "~> 1.1"},
+      {:opentelemetry_api, "~> 0.5.0"},
+      {:opentelemetry_zipkin, "~> 0.4.0"},
+      {:opentelemetry_elli, git: "https://github.com/opentelemetry-beam/opentelemetry_elli.git", branch: "master"}
+
+      # {:opentelemetry_elli, "~> 0.1.0"}
     ]
   end
 

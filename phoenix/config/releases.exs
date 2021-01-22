@@ -16,6 +16,11 @@ config :hello, Hello.Repo,
   url: database_url,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
+config :opentelemetry,
+  :processors, otel_batch_processor: %{
+    exporter: {:opentelemetry_zipkin, %{
+      address: 'http://localhost:9411/api/v2/spans', local_endpoint: %{service_name: "Phoenix"}}}}
+
 secret_key_base =
   System.get_env("SECRET_KEY_BASE") ||
     raise """

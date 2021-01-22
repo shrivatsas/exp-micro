@@ -19,6 +19,8 @@ defmodule Hello.Application do
       # {Hello.Worker, arg}
     ]
 
+    _ = OpenTelemetry.register_application_tracer(:phoenix)
+
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Hello.Supervisor]
