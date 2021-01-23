@@ -23,3 +23,6 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 [Hex](https://hex.pm/) is a package manager for erlang ecosystem  
 [Mix](https://hexdocs.pm/mix/Mix.html) is a build tool for elixir projects (_rebar3_ for erlang)  
 [Ecto](https://hexdocs.pm/ecto/Ecto.html) is a toolkit for data mapping and language integrated query for Elixir  
+
+Tutorials
+https://github.com/undeadlabs/discovery

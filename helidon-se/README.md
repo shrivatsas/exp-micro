@@ -177,3 +177,4 @@ docker run --rm helidon-se-jlink:latest --help
 Examples
 
 https://github.com/nagypeter/helidon-tutorial
+https://github.com/tomas-langer/helidon-conference

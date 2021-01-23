@@ -34,13 +34,13 @@ services:
   #     - mysql
   #   networks: 
   #     - microexp
-      
-  # express:
-  #   build:
-  #     context: ./expressjs/
-  #     dockerfile: Dockerfile
-  #   networks: 
-  #     - microexp
+
+  express:
+    build:
+      context: ./expressjs/
+      dockerfile: Dockerfile
+    networks: 
+      - microexp
 
   fastapi:
     build:
@@ -72,19 +72,19 @@ services:
   #   networks: 
   #     - microexp
 
-  micronaut:
-    build:
-      context: ./micronaut/
-      dockerfile: Dockerfile
-    networks: 
-      - microexp
+  # micronaut:
+  #   build:
+  #     context: ./micronaut/
+  #     dockerfile: Dockerfile
+  #   networks: 
+  #     - microexp
 
-  quarkus:
-    build:
-      context: ./quarkus/
-      dockerfile: src/main/docker/Dockerfile.jvm
-    networks: 
-      - microexp
+  # quarkus:
+  #   build:
+  #     context: ./quarkus/
+  #     dockerfile: src/main/docker/Dockerfile.jvm
+  #   networks: 
+  #     - microexp
 
   zipkin:
     image: openzipkin/zipkin:latest
@@ -93,17 +93,17 @@ services:
     networks: 
       - microexp
 
-  jaeger:
-    image: jaegertracing/all-in-one:latest
-    ports:
-      - "5775:5775/udp" 
-      - "6831:6831/udp"
-      - "6832:6832/udp"
-      - "5778:5778"
-      - "16686:16686"
-      - "14268:14268"
-    networks: 
-      - microexp
+  # jaeger:
+  #   image: jaegertracing/all-in-one:latest
+  #   ports:
+  #     - "5775:5775/udp" 
+  #     - "6831:6831/udp"
+  #     - "6832:6832/udp"
+  #     - "5778:5778"
+  #     - "16686:16686"
+  #     - "14268:14268"
+  #   networks: 
+  #     - microexp
 
   prometheus:
     image: prom/prometheus:latest
@@ -155,17 +155,17 @@ services:
     networks: 
       - microexp
 
-  mysql:
-    image: mysql:8
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpwd
-      MYSQL_USER: elixir
-      MYSQL_PASSWORD: elixirpwd
-      MYSQL_DATABASE: hello
-    volumes: 
-      - mysqlvol:/var/lib/mysql
-    networks: 
-      - microexp
+  # mysql:
+  #   image: mysql:8
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: rootpwd
+  #     MYSQL_USER: elixir
+  #     MYSQL_PASSWORD: elixirpwd
+  #     MYSQL_DATABASE: hello
+  #   volumes: 
+  #     - mysqlvol:/var/lib/mysql
+  #   networks: 
+  #     - microexp
 
 networks:
   microexp:
@@ -175,6 +175,6 @@ networks:
       config: 
         - subnet: "172.22.0.0/32"
 
-volumes:
-  mysqlvol:
-    name: mysql01    
+# volumes:
+#   mysqlvol:
+#     name: mysql01

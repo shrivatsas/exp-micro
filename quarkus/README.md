@@ -32,3 +32,7 @@ If you want to learn more about building native executables, please consult http
 
 Jaeger / Zipkin
 https://github.com/quarkusio/quarkus/issues/8053
+
+Tutorials
+https://piotrminkowski.com/2020/11/24/quarkus-microservices-with-consul-discovery/
+https://openjdk.java.net/groups/net/httpclient/intro.htmlphoenix/README.md
