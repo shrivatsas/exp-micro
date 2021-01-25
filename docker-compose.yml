@@ -51,8 +51,10 @@ services:
 
   gin:
     build:
-      context: ./go/
+      context: ./gin/
       dockerfile: Dockerfile
+    labels:
+      - "traefik.http.routers.gin.rule=Host(`gin.docker.localhost`)"
     networks: 
       - microexp
 
@@ -112,7 +114,7 @@ services:
     command:
       - --config.file=/etc/prometheus/prometheus.yml
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     networks: 
       - microexp
 
@@ -166,6 +168,22 @@ services:
   #     - mysqlvol:/var/lib/mysql
   #   networks: 
   #     - microexp
+
+  traefik-proxy:
+      # The official v2.0 Traefik docker image
+      image: traefik:v2.4
+      # Enables the web UI and tells Traefik to listen to docker
+      command: --api.insecure=true --providers.docker
+      ports:
+        # The HTTP port
+        - "80:80"
+        # The Web UI (enabled by --api.insecure=true)
+        - "8080:8080"
+      volumes:
+        # So that Traefik can listen to the Docker events
+        - /var/run/docker.sock:/var/run/docker.sock
+      networks: 
+        - microexp
 
 networks:
   microexp:
