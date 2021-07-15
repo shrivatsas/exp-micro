@@ -1,27 +1,6 @@
 version: "3.8"
 
 services:
-  consul-agent-1:
-    image: consul:latest
-    command: "agent -retry-join consul-server-bootstrap -client 0.0.0.0"
-    networks:
-      microexp:
-        ipv4_address: "172.22.0.21"
-
-  consul-agent-2:
-    image: consul:latest
-    command: "agent -retry-join consul-server-bootstrap -client 0.0.0.0"
-    networks:
-      microexp:
-        ipv4_address: "172.22.0.22"
-
-  consul-agent-3:
-    image: consul:latest
-    command: "agent -retry-join consul-server-bootstrap -client 0.0.0.0"
-    networks:
-      microexp:
-        ipv4_address: "172.22.0.23"
-
   # elixir:
   #   build:
   #     context: ./elixir/hello/
@@ -42,12 +21,12 @@ services:
     networks: 
       - microexp
 
-  fastapi:
-    build:
-      context: ./fastapi/
-      dockerfile: Dockerfile
-    networks: 
-      - microexp
+  # fastapi:
+  #   build:
+  #     context: ./fastapi/
+  #     dockerfile: Dockerfile
+  #   networks: 
+  #     - microexp
 
   gin:
     build:
@@ -88,12 +67,12 @@ services:
   #   networks: 
   #     - microexp
 
-  zipkin:
-    image: openzipkin/zipkin:latest
-    ports:
-      - "9411:9411"
-    networks: 
-      - microexp
+  # zipkin:
+  #   image: openzipkin/zipkin:latest
+  #   ports:
+  #     - "9411:9411"
+  #   networks: 
+  #     - microexp
 
   # jaeger:
   #   image: jaegertracing/all-in-one:latest
@@ -107,39 +86,16 @@ services:
   #   networks: 
   #     - microexp
 
-  prometheus:
-    image: prom/prometheus:latest
-    ports:
-      - "9090:9090"
-    command:
-      - --config.file=/etc/prometheus/prometheus.yml
-    volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-    networks: 
-      - microexp
-
-  consul-server-1:
-    image: consul:latest
-    command: "agent -server -retry-join consul-server-bootstrap -client 0.0.0.0"
-    networks:
-      microexp:
-
-  consul-server-2:
-    image: consul:latest
-    command: "agent -server -retry-join consul-server-bootstrap -client 0.0.0.0"
-    networks:
-      microexp:
-
-  consul-server-bootstrap:
-    image: consul:latest
-    networks:
-      microexp:
-    ports:
-      - "8400:8400"
-      - "8500:8500"
-      - "8600:8600"
-      - "8600:8600/udp"
-    command: "agent -server -bootstrap-expect 3 -ui -client 0.0.0.0"
+  # prometheus:
+  #   image: prom/prometheus:latest
+  #   ports:
+  #     - "9090:9090"
+  #   command:
+  #     - --config.file=/etc/prometheus/prometheus.yml
+  #   volumes:
+  #     - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  #   networks: 
+  #     - microexp
 
   # ambassador:
   #   image: docker.io/datawire/aes:1.9.1
@@ -149,13 +105,6 @@ services:
   #     - "8080:8080"
   #   networks:
   #     - microexp
-
-  nats:
-    image: nats:latest
-    ports:
-      - "4222:4222"
-    networks: 
-      - microexp
 
   # mysql:
   #   image: mysql:8
@@ -169,29 +118,26 @@ services:
   #   networks: 
   #     - microexp
 
-  traefik-proxy:
-      # The official v2.0 Traefik docker image
-      image: traefik:v2.4
-      # Enables the web UI and tells Traefik to listen to docker
-      command: --api.insecure=true --providers.docker
-      ports:
-        # The HTTP port
-        - "80:80"
-        # The Web UI (enabled by --api.insecure=true)
-        - "8080:8080"
-      volumes:
-        # So that Traefik can listen to the Docker events
-        - /var/run/docker.sock:/var/run/docker.sock
-      networks: 
-        - microexp
+  # traefik-proxy:
+  #     # The official v2.0 Traefik docker image
+  #     image: traefik:v2.4
+  #     # Enables the web UI and tells Traefik to listen to docker
+  #     command: --api.insecure=true --providers.docker
+  #     ports:
+  #       # The HTTP port
+  #       - "80:80"
+  #       # The Web UI (enabled by --api.insecure=true)
+  #       - "8080:8080"
+  #     volumes:
+  #       # So that Traefik can listen to the Docker events
+  #       - /var/run/docker.sock:/var/run/docker.sock
+  #     networks: 
+  #       - microexp
 
 networks:
   microexp:
     name: microexp
-    ipam:
-      driver: default
-      config: 
-        - subnet: "172.22.0.0/32"
+    external: true
 
 # volumes:
 #   mysqlvol:
